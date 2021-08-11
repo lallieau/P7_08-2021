@@ -1,0 +1,28 @@
+.form-inline {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+}
+
+.form-control {
+  height: 70px;
+  width: 100%;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.form-control:focus {
+  height: 70px;
+  width: 100%;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.btn-search {
+  background-color: var(--secondary-color);
+  border: none;
+  padding: 20px;
+  border-radius: 0px 5px 5px 0px;
+}

@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+@import "./variables.css";
+@import "./components/card-recipe.css";
+@import "./components/filters.css";
+@import "./components/search.css";
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: var(--regular);
+  margin: 0 auto;
+  max-width: 1240px;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  color: var(--primary-color);
+}

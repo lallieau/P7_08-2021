@@ -1,0 +1,17 @@
+:root {
+  /* Colors */
+  --primary-color: #d04f4f;
+  --secondary-color: #e7e7e7;
+  --black-color: #000000;
+
+  --blue-color: #3282f7;
+  --green-color: #68d9a4;
+  --red-color: #ed6454;
+
+  /* Fonts */
+  --bold: 700;
+  --regular: 400;
+
+  --text: 12px;
+  --title: 18px;
+}
