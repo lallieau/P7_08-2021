@@ -23,10 +23,20 @@
   display: flex;
 }
 
+.card-recipe__text {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 70%;
+}
+
 .card-recipe__body {
   background-color: var(--secondary-color);
-
-  padding: 20px;
+  border-radius: 0px 0px 5px 5px;
+  height: 250px;
+  padding: 15px;
   margin: 0 auto;
 }
 
@@ -34,19 +44,22 @@
   font-size: var(--title);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding-bottom: 10px;
 }
 
 .card-recipe__title {
   font-size: var(--title);
   font-weight: var(--regular);
-  margin: 0;
+  margin-right: 20px;
 }
 
 .card-recipe__list-ingredients {
-  list-style: none;
   white-space: nowrap;
+}
+
+.card-recipe__list-ingredients__name {
+  list-style: none;
   padding: 0px 30px 0px 0px;
 }
 
@@ -59,6 +72,6 @@
 
 .card-recipe__time p {
   margin: 0;
-  padding: 0;
+  padding: 5px;
   font-weight: var(--bold);
 }
