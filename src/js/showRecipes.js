@@ -60,6 +60,27 @@ const recipesListTemplate = (recipe) => {
       `;
 };
 
-recipesList.innerHTML = recipes
-  .map((recipe) => recipesListTemplate(recipe))
-  .join("");
+const searchValue = document.querySelector(".form-control");
+
+const showRecipes = (searchValue) => {
+  const test = recipes.filter(
+    (recipe) =>
+      recipe.name.toLowerCase().includes(searchValue) ||
+      recipe.description.toLowerCase().includes(searchValue)
+    // ajouter les filtres au niveau des ingrédients
+  );
+
+  recipesList.innerHTML = test
+    .map((recipe) => {
+      return recipesListTemplate(recipe);
+    })
+    .join("");
+};
+
+searchValue.addEventListener("input", () => {
+  if (searchValue.value.length >= 3) {
+    return showRecipes(searchValue.value);
+  }
+});
+
+showRecipes("");
