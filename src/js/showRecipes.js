@@ -63,17 +63,18 @@ const recipesListTemplate = (recipe) => {
 const searchValue = document.querySelector(".form-control");
 
 const showRecipes = (searchValue) => {
-  const test = recipes.filter(
+  const filterRecipes = recipes.filter(
     (recipe) =>
       recipe.name.toLowerCase().includes(searchValue) ||
       recipe.description.toLowerCase().includes(searchValue)
-    // ajouter les filtres au niveau des ingrédients
+    // ||
+    // recipe.ingredients.filter((element) => {
+    //   element.ingredient.toLowerCase().includes(searchValue);
+    // })
   );
 
-  recipesList.innerHTML = test
-    .map((recipe) => {
-      return recipesListTemplate(recipe);
-    })
+  recipesList.innerHTML = filterRecipes
+    .map((recipe) => recipesListTemplate(recipe))
     .join("");
 };
 
@@ -83,4 +84,4 @@ searchValue.addEventListener("input", () => {
   }
 });
 
-showRecipes("");
+showRecipes("coco");
