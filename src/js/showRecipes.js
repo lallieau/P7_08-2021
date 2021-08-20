@@ -78,10 +78,69 @@ const showRecipes = (searchValue) => {
     .join("");
 };
 
-searchValue.addEventListener("input", () => {
-  if (searchValue.value.length >= 3) {
-    return showRecipes(searchValue.value);
-  }
-});
+// searchValue.addEventListener("input", (e) => {
+//   if (e.target.value.length >= 3) {
+//     const recipe = filterRecipes(e.target.value)
+//     return showRecipes(searchValue.value);
+//   }
+// });
 
-showRecipes("coco");
+const MINIMUM_MATCHING_PERCENTAGE = 0.6;
+
+// const createChunk = (
+//   recipes,
+//   chunkSize = 50,
+//   offset = 0,
+//   recipesChunked = []
+// ) => {
+//   if (recipes.length === 0) {
+//     return recipesChunked;
+//   }
+//   const chunk = recipes.splice(offset, offset + chunkSize);
+
+//   return createChunk(recipes, chunkSize, offset + chunkSize, [
+//     ...recipesChunked,
+//     chunk,
+//   ]);
+// };
+
+const filterRecipesBySearchText = (searchText) => {
+  const checkIfMatch = (text, search) => {
+    const [formattedText, formattedSearch] = [
+      text.trim().toLowerCase(),
+      search.trim().toLowerCase(),
+    ];
+
+    const numberOfLetterMatched = 0;
+
+    for (let index; index < formattedText.length; index++) {
+      const letter = formattedText[index];
+
+      if (formattedSearch.includes(letter)) {
+        numberOfLetterMatched += 1;
+      }
+    }
+
+    return (
+      numberOfLetterMatched / formattedText.length >=
+      MINIMUM_MATCHING_PERCENTAGE
+    );
+  };
+
+  return recipes.filter(({ name, description, ingredients }) =>
+    [
+      name,
+      description,
+      ...ingredients.map(({ ingredient }) => ingredient),
+    ].some((value) => checkIfMatch(value, searchText))
+  );
+};
+
+// createChunk(recipes, 10).find((chunk) =>
+//   filterRecipesBySearchText("coco")(chunk)
+// );
+
+(() => {
+  const recipeFound = filterRecipesBySearchText("coco");
+  recipesList.innerHTML = recipesListTemplate(recipeFound);
+})();
