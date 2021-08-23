@@ -46,11 +46,9 @@ const recipesListTemplate = (recipe) => {
                 </div>
             </div>
             <div class="card-recipe__content">
-                <ul id="card-recipe__list-ingredients">
-                ${recipe.ingredients
-                  .map(recipeIngredientsListTemplate)
-                  .join("")}
-                </ul>
+            <ul id="card-recipe__list-ingredients">
+            ${recipe.ingredients.map(recipeIngredientsListTemplate).join("")}
+            </ul>
                 <p class="card-recipe__text">
                 ${recipe.description}
                 </p>
@@ -62,30 +60,23 @@ const recipesListTemplate = (recipe) => {
 
 const searchValue = document.querySelector(".form-control");
 
-const showRecipes = (searchValue) => {
-  const filterRecipes = recipes.filter(
-    (recipe) =>
-      recipe.name.toLowerCase().includes(searchValue) ||
-      recipe.description.toLowerCase().includes(searchValue)
-    // ||
-    // recipe.ingredients.filter((element) => {
-    //   element.ingredient.toLowerCase().includes(searchValue);
-    // })
-  );
+// const showRecipes = (searchValue) => {
+//   const filterRecipes = recipes.filter(
+//     (recipe) =>
+//       recipe.name.toLowerCase().includes(searchValue) ||
+//       recipe.description.toLowerCase().includes(searchValue)
+//     // ||
+//     // recipe.ingredients.filter((element) => {
+//     //   element.ingredient.toLowerCase().includes(searchValue);
+//     // })
+//   );
 
-  recipesList.innerHTML = filterRecipes
-    .map((recipe) => recipesListTemplate(recipe))
-    .join("");
-};
+//   recipesList.innerHTML = filterRecipes
+//     .map((recipe) => recipesListTemplate(recipe))
+//     .join("");
+// };
 
-// searchValue.addEventListener("input", (e) => {
-//   if (e.target.value.length >= 3) {
-//     const recipe = filterRecipes(e.target.value)
-//     return showRecipes(searchValue.value);
-//   }
-// });
-
-const MINIMUM_MATCHING_PERCENTAGE = 0.6;
+// const MINIMUM_MATCHING_PERCENTAGE = 0.6;
 
 // const createChunk = (
 //   recipes,
@@ -111,20 +102,19 @@ const filterRecipesBySearchText = (searchText) => {
       search.trim().toLowerCase(),
     ];
 
-    const numberOfLetterMatched = 0;
+    // const numberOfLetterMatched = 0;
+    // for (let index; index < formattedText.length; index++) {
+    //   const letter = formattedText[index];
+    //   if (formattedSearch.includes(letter)) {
+    //     numberOfLetterMatched += 1;
+    //   }
+    // }
+    // return (
+    //   numberOfLetterMatched / formattedText.length >=
+    //   MINIMUM_MATCHING_PERCENTAGE
+    // );
 
-    for (let index; index < formattedText.length; index++) {
-      const letter = formattedText[index];
-
-      if (formattedSearch.includes(letter)) {
-        numberOfLetterMatched += 1;
-      }
-    }
-
-    return (
-      numberOfLetterMatched / formattedText.length >=
-      MINIMUM_MATCHING_PERCENTAGE
-    );
+    return formattedText.includes(formattedSearch);
   };
 
   return recipes.filter(({ name, description, ingredients }) =>
@@ -140,7 +130,19 @@ const filterRecipesBySearchText = (searchText) => {
 //   filterRecipesBySearchText("coco")(chunk)
 // );
 
-(() => {
-  const recipeFound = filterRecipesBySearchText("coco");
-  recipesList.innerHTML = recipesListTemplate(recipeFound);
-})();
+let recipeFound = filterRecipesBySearchText("");
+
+const renderRecipes = () => {
+  recipesList.innerHTML = recipeFound
+    .map((recipe) => recipesListTemplate(recipe))
+    .join("");
+};
+
+searchValue.addEventListener("input", (e) => {
+  if (e.target.value.length >= 3) {
+    recipeFound = filterRecipesBySearchText(e.target.value);
+    return renderRecipes();
+  }
+});
+
+renderRecipes();
