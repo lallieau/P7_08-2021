@@ -1,7 +1,9 @@
 import { recipes } from "./recipes.js";
 import { recipesListTemplate } from "./templates/recipesListTemplate.js";
+import { noResultTemplate } from "./templates/recipesListTemplate.js";
 
 const recipesList = document.querySelector("#list-recipes");
+const noResult = document.querySelector(".no-result");
 const searchInput = document.querySelector(".form-control");
 const searchForm = document.querySelector(".form-inline");
 
@@ -31,6 +33,8 @@ const filterRecipesBySearchText = (searchFilter) => {
 const recipeFound = filterRecipesBySearchText(searchFilter);
 
 const renderRecipes = () => {
+  if (recipeFound.length === 0) noResult.innerHTML = noResultTemplate();
+
   recipesList.innerHTML = recipeFound
     .map((recipe) => recipesListTemplate(recipe))
     .join("");

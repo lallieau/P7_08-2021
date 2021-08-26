@@ -1,3 +1,7 @@
+export const noResultTemplate = () => {
+  return `<p>Aucune recette ne correspond à votre critère... </br> Vous pouvez chercher "tarte aux pommes", "poisson", etc.</p>`;
+};
+
 const recipeIngredientsListTemplate = (recipeIngredients) => {
   if (!recipeIngredients.unit && !recipeIngredients.quantity) {
     return `<li class="card-recipe__list-ingredients__name">
