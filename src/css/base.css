@@ -27,8 +27,8 @@ a {
   text-decoration: none;
 }
 
-a:visited,
-a:hover,
-a:active {
+header a:visited,
+header a:hover,
+header a:active {
   color: var(--primary-color);
 }
