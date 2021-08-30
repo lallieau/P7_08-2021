@@ -37,9 +37,11 @@ searchForm.addEventListener("submit", (e) => {
 });
 
 searchInput.addEventListener("change", () => {
-  searchParams.set("searchBy", searchInput.value);
-  window.location.search = searchParams;
+  if (searchInput.value.length >= 3) {
+    searchParams.set("searchBy", searchInput.value);
+    window.location.search = searchParams;
 
-  recipeFound = filterRecipesBySearchText(searchFilter);
-  return renderRecipes();
+    recipeFound = filterRecipesBySearchText(searchFilter);
+    return renderRecipes();
+  }
 });

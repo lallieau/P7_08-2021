@@ -7,9 +7,9 @@ import { filterRecipesBySearchText, searchFilter } from "./mainResearch.js";
 const recipesList = document.querySelector("#list-recipes");
 const noResult = document.querySelector(".no-result");
 
-export const recipeFound = filterRecipesBySearchText(searchFilter);
+export let recipeFound = filterRecipesBySearchText(searchFilter);
 
-const renderRecipes = () => {
+const showRecipes = () => {
   if (recipeFound.length === 0) noResult.innerHTML = noResultTemplate();
 
   recipesList.innerHTML = recipeFound
@@ -17,4 +17,4 @@ const renderRecipes = () => {
     .join("");
 };
 
-renderRecipes();
+showRecipes();

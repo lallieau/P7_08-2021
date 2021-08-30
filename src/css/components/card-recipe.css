@@ -14,7 +14,7 @@
 .card-recipe {
   margin-bottom: 30px;
   background-color: var(--secondary-color);
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 5px;
 }
 
 .card-recipe img {
