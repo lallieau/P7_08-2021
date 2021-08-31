@@ -1,3 +1,3 @@
-export const ingredientsListTemplate = (element) => {
+export const ElementsListTemplate = (element) => {
   return `<li><a class="dropdown-item" href="#">${element}</a></li>`;
 };

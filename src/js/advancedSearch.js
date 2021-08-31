@@ -1,6 +1,5 @@
-import { recipes } from "./recipes.js";
 import { recipeFound } from "./showRecipes.js";
-import { ingredientsListTemplate } from "./templates/dropdownTemplates.js";
+import { ElementsListTemplate } from "./templates/dropdownTemplate.js";
 
 const ingredientsList = document.querySelector("#dropdownMenu1");
 const appliancesList = document.querySelector("#dropdownMenu2");
@@ -14,29 +13,24 @@ const renderIngredients = () => {
   const removeDuplicateElements = (array) =>
     array.filter((item, index) => array.indexOf(item) === index);
 
+  const displayElements = (allElements) =>
+    removeDuplicateElements(allElements)
+      .map((element) => ElementsListTemplate(element))
+      .join("");
+
   recipeFound.map((recipe) => {
+    allAppliances.push(recipe.appliance);
     recipe.ingredients.map((element) => {
       allIngredients.push(element.ingredient.toLowerCase());
     });
-
-    allAppliances.push(recipe.appliance);
-
     recipe.ustensils.map((element) => {
       allUstensils.push(element);
     });
   });
 
-  ustensilsList.innerHTML = removeDuplicateElements(allUstensils)
-    .map((element) => ingredientsListTemplate(element))
-    .join("");
-
-  appliancesList.innerHTML = removeDuplicateElements(allAppliances)
-    .map((element) => ingredientsListTemplate(element))
-    .join("");
-
-  ingredientsList.innerHTML = removeDuplicateElements(allIngredients)
-    .map((element) => ingredientsListTemplate(element))
-    .join("");
+  ustensilsList.innerHTML = displayElements(allUstensils);
+  appliancesList.innerHTML = displayElements(allAppliances);
+  ingredientsList.innerHTML = displayElements(allIngredients);
 };
 
 renderIngredients();
