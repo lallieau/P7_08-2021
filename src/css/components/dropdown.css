@@ -41,3 +41,8 @@
 .dropdown-item {
   color: #fff;
 }
+
+.dropdown-menu.show {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

@@ -1,36 +1,17 @@
-import { recipeFound } from "./showRecipes.js";
-import { ElementsListTemplate } from "./templates/dropdownTemplate.js";
+import { searchParams } from "./mainResearch.js";
 
-const ingredientsList = document.querySelector("#dropdownMenu1");
-const appliancesList = document.querySelector("#dropdownMenu2");
-const ustensilsList = document.querySelector("#dropdownMenu3");
+// searchParams.append("filterBy", "");
 
-const renderIngredients = () => {
-  let allIngredients = [];
-  let allAppliances = [];
-  let allUstensils = [];
+export let filterName = "lait";
 
-  const removeDuplicateElements = (array) =>
-    array.filter((item, index) => array.indexOf(item) === index);
+const linkItem = document.querySelectorAll(".dropdown-item");
 
-  const displayElements = (allElements) =>
-    removeDuplicateElements(allElements)
-      .map((element) => ElementsListTemplate(element))
-      .join("");
-
-  recipeFound.map((recipe) => {
-    allAppliances.push(recipe.appliance);
-    recipe.ingredients.map((element) => {
-      allIngredients.push(element.ingredient.toLowerCase());
-    });
-    recipe.ustensils.map((element) => {
-      allUstensils.push(element);
-    });
-  });
-
-  ustensilsList.innerHTML = displayElements(allUstensils);
-  appliancesList.innerHTML = displayElements(allAppliances);
-  ingredientsList.innerHTML = displayElements(allIngredients);
-};
-
-renderIngredients();
+linkItem.forEach((item) =>
+  item.addEventListener("click", (e) => {
+    e.preventDefault();
+    // if (!filterName) {
+    //   searchParams.set("filterBy", item.textContent);
+    //   window.location.search = searchParams;
+    // } else searchParams.append("filterBy", item.textContent);
+  })
+);

@@ -1,19 +1,27 @@
-import { recipes } from "./recipes.js";
+import { recipes } from "./data/recipes.js";
+import { filterName } from "./advancedSearch.js";
 
 const searchInput = document.querySelector(".form-control");
 const searchForm = document.querySelector(".form-inline");
 
-const searchParams = new URLSearchParams(window.location.search);
+export const searchParams = new URLSearchParams(window.location.search);
 searchParams.append("searchBy", "");
 export let searchFilter = searchParams.get("searchBy");
 
-export const filterRecipesBySearchText = (searchFilter) => {
-  const checkIfMatch = (text, search) => {
-    const [formattedText, formattedSearch] = [
+export const filterRecipesBySearchText = (searchFilter, filterName) => {
+  const checkIfMatch = (text, search, filter) => {
+    const [formattedText, formattedSearch, formattedFilter] = [
       text.trim().toLowerCase(),
       search.trim().toLowerCase(),
+      filter.trim().toLowerCase(),
     ];
-    return formattedText.includes(formattedSearch);
+
+    if (
+      formattedText.includes(formattedSearch) &&
+      formattedText.includes(formattedFilter)
+    ) {
+      return formattedText;
+    }
   };
 
   return recipes.filter(({ name, description, ingredients }) =>
@@ -21,7 +29,7 @@ export const filterRecipesBySearchText = (searchFilter) => {
       name,
       description,
       ...ingredients.map(({ ingredient }) => ingredient),
-    ].some((value) => checkIfMatch(value, searchFilter))
+    ].some((value) => checkIfMatch(value, searchFilter, filterName))
   );
 };
 
@@ -31,7 +39,7 @@ searchForm.addEventListener("submit", (e) => {
     searchParams.set("searchBy", searchInput.value);
 
     searchFilter = searchParams.get("searchBy");
-    recipeFound = filterRecipesBySearchText(searchFilter);
+    recipeFound = filterRecipesBySearchText(searchFilter, filterName);
     return renderRecipes();
   }
 });
@@ -41,7 +49,7 @@ searchInput.addEventListener("change", () => {
     searchParams.set("searchBy", searchInput.value);
     window.location.search = searchParams;
 
-    recipeFound = filterRecipesBySearchText(searchFilter);
+    recipeFound = filterRecipesBySearchText(searchFilter, filterName);
     return renderRecipes();
   }
 });
