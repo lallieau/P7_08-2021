@@ -6,9 +6,7 @@ const appliancesList = document.querySelector("#dropdownMenu2");
 const ustensilsList = document.querySelector("#dropdownMenu3");
 
 const showAdvancedSearch = () => {
-  let allIngredients = [];
-  let allAppliances = [];
-  let allUstensils = [];
+  let [allIngredients, allAppliances, allUstensils] = [[], [], []];
 
   const removeDuplicateElements = (array) =>
     array.filter((item, index) => array.indexOf(item) === index);

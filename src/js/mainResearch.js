@@ -13,8 +13,10 @@ export const filterRecipesBySearchText = (searchFilter, filterName) => {
     const [formattedText, formattedSearch, formattedFilter] = [
       text.trim().toLowerCase(),
       search.trim().toLowerCase(),
-      filter.trim().toLowerCase(),
+      filter.map((element) => element.trim().toLowerCase()),
     ];
+
+    console.log(formattedFilter);
 
     if (
       formattedText.includes(formattedSearch) &&
