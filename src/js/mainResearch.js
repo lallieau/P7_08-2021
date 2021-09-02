@@ -16,11 +16,16 @@ export const filterRecipesBySearchText = (searchFilter, filterName) => {
       filter.map((element) => element.trim().toLowerCase()),
     ];
 
-    console.log(formattedFilter);
-
     if (
       formattedText.includes(formattedSearch) &&
-      formattedText.includes(formattedFilter)
+      formattedFilter.map((element) =>
+        console.log(
+          formattedText,
+          ":",
+          element,
+          formattedText.includes(element)
+        )
+      )
     ) {
       return formattedText;
     }
