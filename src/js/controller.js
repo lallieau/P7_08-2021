@@ -9,9 +9,9 @@ export const filterRecipesBySearchText = (searchFilter, filterName) => {
     ];
 
     if (
-      formattedText.includes(formattedSearch) //&&
+      formattedText.includes(formattedSearch) &&
       //formattedFilter.map((element) => formattedText.includes(element))
-      //formattedFilter.some((element) => formattedText === element)
+      formattedFilter.some((element) => formattedText === element)
     ) {
       return formattedText;
     }
