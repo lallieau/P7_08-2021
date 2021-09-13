@@ -1,0 +1,33 @@
+.tags {
+  padding: 15px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  width: fit-content;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.tag p {
+  padding-right: 10px;
+}
+
+.fa-times-circle {
+  cursor: pointer;
+}
+
+.tag-ingredients {
+  background-color: var(--blue-color);
+}
+
+.tag-appliances {
+  background-color: var(--green-color);
+}
+
+.tag-ustensils {
+  background-color: var(--red-color);
+}

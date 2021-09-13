@@ -59,14 +59,14 @@ export const recipesListTemplate = (recipe) => {
 };
 
 export const elementsListTemplate = (element) => {
-  return `<li><button class="dropdown-item">${element}</button></li>`;
+  return `<li class="dropdown-item">${element}</li>`;
 };
 
-export const tagListTemplate = (tagName) => {
+export const tagListTemplate = (tagName, caterogyName) => {
   return `  
-  <div class="tag">
-    <button class="tag__close"></button>
+  <div class="tag tag-${caterogyName}">
     <p class="tag__name">${tagName}</p>
+    <i class="fas fa-times-circle"></i>
   </div>
   `;
 };
