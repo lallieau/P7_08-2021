@@ -72,3 +72,9 @@ document.addEventListener("click", (event) => {
     });
   }
 });
+
+//
+// Afficher la liste des éléments en fonction du texte dans l'input
+//
+
+// inputIngredient.addEventListener("input", () => {});
