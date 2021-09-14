@@ -32,9 +32,9 @@ searchInput.addEventListener("input", () => {
 // 4) Afficher les recettes correspondantes
 //
 document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("dropdown-ingredients")) {
+  if (event.target.id === "input-ingredients") {
     document.addEventListener("click", (event) => {
-      if (event.target.classList.contains("dropdown-item")) {
+      if (event.target.classList.contains("item")) {
         filterName.push(event.target.textContent);
         filterName.map(
           (element) =>
@@ -46,9 +46,9 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("dropdown-appliances")) {
+  if (event.target.id === "input-appliances") {
     document.addEventListener("click", (event) => {
-      if (event.target.classList.contains("dropdown-item")) {
+      if (event.target.classList.contains("item")) {
         filterName.push(event.target.textContent);
         filterName.map(
           (element) =>
@@ -60,9 +60,9 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("dropdown-ustensils")) {
+  if (event.target.id === "input-ustensils") {
     document.addEventListener("click", (event) => {
-      if (event.target.classList.contains("dropdown-item")) {
+      if (event.target.classList.contains("item")) {
         filterName.push(event.target.textContent);
         filterName.map(
           (element) =>

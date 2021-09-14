@@ -9,9 +9,9 @@ import { filterRecipesBySearchText } from "./controller.js";
 const recipesList = document.querySelector("#list-recipes");
 const noResult = document.querySelector(".no-result");
 
-const ingredientsList = document.querySelector("#dropdownMenu1");
-const appliancesList = document.querySelector("#dropdownMenu2");
-const ustensilsList = document.querySelector("#dropdownMenu3");
+const ingredientsList = document.querySelector("#ingredients-placeholder");
+const appliancesList = document.querySelector("#appliances-placeholder");
+const ustensilsList = document.querySelector("#ustensils-placeholder");
 
 export let filterName = [""];
 export let searchFilter = "";

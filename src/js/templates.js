@@ -59,7 +59,7 @@ export const recipesListTemplate = (recipe) => {
 };
 
 export const elementsListTemplate = (element) => {
-  return `<li class="dropdown-item">${element}</li>`;
+  return `<li class="item">${element}</li>`;
 };
 
 export const tagListTemplate = (tagName, caterogyName) => {
