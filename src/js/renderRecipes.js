@@ -4,7 +4,7 @@ import {
   elementsListTemplate,
 } from "./templates.js";
 
-import { filterRecipesBySearchText } from "./controller.js";
+import { recipeFound } from "./eventListeners.js";
 
 const recipesList = document.querySelector("#list-recipes");
 const noResult = document.querySelector(".no-result");
@@ -13,14 +13,10 @@ const ingredientsList = document.querySelector("#ingredients-placeholder");
 const appliancesList = document.querySelector("#appliances-placeholder");
 const ustensilsList = document.querySelector("#ustensils-placeholder");
 
-export let filterName = [""];
-export let searchFilter = "";
-export let recipeFound = filterRecipesBySearchText(searchFilter);
+// export let tagName = [""];
+// export let searchFilter = "";
+// export let recipeFound = filterRecipesBySearchText(searchFilter);
 
-//
-// Retourne la liste de toutes les recettes
-// en fonction des filtres de recherches (recherche principales, recherche par tag)
-//
 export const renderRecipes = () => {
   if (recipeFound.length === 0) noResult.innerHTML = noResultTemplate();
 
@@ -31,9 +27,6 @@ export const renderRecipes = () => {
   renderAdvancedSearch();
 };
 
-//
-// Retourne la liste des éléments pour chaque catégorie de tri (ingrédients, ustensiles, appareils)
-//
 export const renderAdvancedSearch = () => {
   let [allIngredients, allAppliances, allUstensils] = [[], [], []];
 

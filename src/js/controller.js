@@ -1,8 +1,5 @@
 import { recipes } from "./data/recipes.js";
 
-//
-// Filtre les recettes avec la recherche principale
-//
 export const filterRecipesBySearchText = (searchFilter) => {
   const checkIfMatch = (text, search) => {
     const [formattedText, formattedSearch] = [
@@ -24,38 +21,45 @@ export const filterRecipesBySearchText = (searchFilter) => {
   );
 };
 
-//
-// Filtrer les recettes avec les tags des différentes catégories (ingrédients, ustensiles, appareils)
-//
-const checkIfMatch = (text, filter) => {
-  const [formattedText, formattedFilter] = [
-    text.trim().toLowerCase(),
-    filter.map((element) => element.trim().toLowerCase()),
-  ];
+export const filterRecipesByTag = (tagName) => {
+  const checkIfMatch = (text, filter) => {
+    const [formattedText, formattedFilter] = [
+      text.trim().toLowerCase(),
+      filter.map((element) => element.trim().toLowerCase()),
+    ];
 
-  if (formattedFilter.some((element) => formattedText === element)) {
-    return formattedText;
-  }
-};
+    if (formattedFilter.some((element) => formattedText === element)) {
+      return formattedText;
+    }
+  };
 
-export const filterRecipesByIngredients = (filterName) => {
-  return recipes.filter(({ ingredients }) =>
-    [...ingredients.map(({ ingredient }) => ingredient)].some((value) =>
-      checkIfMatch(value, filterName)
-    )
+  return recipes.filter(({ ustensils, ingredients, appliance }) =>
+    [
+      ...ustensils.map((ustensil) => ustensil),
+      ...ingredients.map(({ ingredient }) => ingredient),
+      appliance,
+    ].some((value) => checkIfMatch(value, tagName))
   );
 };
 
-export const filterRecipesByUstensils = (filterName) => {
-  return recipes.filter(({ ustensils }) =>
-    [...ustensils.map((ustensil) => ustensil)].some((value) =>
-      checkIfMatch(value, filterName)
-    )
-  );
-};
+// export const filterRecipesByIngredients = (filterName) => {
+//   return recipes.filter(({ ingredients }) =>
+//     [...ingredients.map(({ ingredient }) => ingredient)].some((value) =>
+//       checkIfMatch(value, filterName)
+//     )
+//   );
+// };
 
-export const filterRecipesByAppliance = (filterName) => {
-  return recipes.filter(({ appliance }) =>
-    [appliance].some((value) => checkIfMatch(value, filterName))
-  );
-};
+// export const filterRecipesByUstensils = (filterName) => {
+//   return recipes.filter(({ ustensils }) =>
+//     [...ustensils.map((ustensil) => ustensil)].some((value) =>
+//       checkIfMatch(value, filterName)
+//     )
+//   );
+// };
+
+// export const filterRecipesByAppliance = (filterName) => {
+//   return recipes.filter(({ appliance }) =>
+//     [appliance].some((value) => checkIfMatch(value, filterName))
+//   );
+// };
