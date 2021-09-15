@@ -1,111 +1,146 @@
-const inputIngredient = document.getElementById("input-ingredients");
-const inputappliances = document.getElementById("input-appliances");
-const inputUstensile = document.getElementById("input-ustensils");
+const inputIngredient = document.querySelector("#input-ingredients");
+const inputAppliance = document.querySelector("#input-appliances");
+const inputUstensil = document.querySelector("#input-ustensils");
 
-const ingredientsBtn = document.getElementById("ingredients");
-const appliancesBtn = document.getElementById("appliances");
-const ustensilsBtn = document.getElementById("ustensils");
+const ingredientBtn = document.querySelector("#ingredients");
+const applianceBtn = document.querySelector("#appliances");
+const ustensilBtn = document.querySelector("#ustensils");
 
-const ingredientsPlaceholder = document.getElementById(
-  "ingredients-placeholder"
-);
-const appliancessPlaceholder = document.getElementById(
-  "appliances-placeholder"
-);
-const ustensilsPlaceholder = document.getElementById("ustensils-placeholder");
-
-// const chevronDowningredients = document.getElementById(
-//   "chevron-down-ingredients"
-// );
-// const chevronUpingredients = document.getElementById("chevron-up-ingredients");
-// const chevronDownappliances = document.getElementById(
-//   "chevron-down-appliances"
-// );
-// const chevronUpappliances = document.getElementById("chevron-up-appliances");
-// const chevronDownustensils = document.getElementById("chevron-down-ustensils");
-// const chevronUpustensils = document.getElementById("chevron-up-ustensils");
+const ingredientsList = document.querySelector("#ingredients-placeholder");
+const appliancesList = document.querySelector("#appliances-placeholder");
+const ustensilsList = document.querySelector("#ustensils-placeholder");
 
 //
 // Ouvrir et fermer les dropdown
 //
+
 const removeAppliances = () => {
-  appliancesBtn.classList.remove("expand-the-btn");
-  appliancessPlaceholder.classList.remove("expanded-appliances");
-  //   chevronDownappliances.style.display = "block";
-  //   chevronUpappliances.style.display = "none";
-  inputappliances.placeholder = "Appareils";
+  applianceBtn.classList.remove("expand-the-btn");
+  appliancesList.classList.remove("expanded-appliances");
+  inputAppliance.placeholder = "Appareils";
 };
 
 const removeUstensils = () => {
-  ustensilsBtn.classList.remove("expand-the-btn");
-  ustensilsPlaceholder.classList.remove("expanded-ustensils");
-  //   chevronDownustensils.style.display = "block";
-  //   chevronUpustensils.style.display = "none";
-  inputUstensile.placeholder = "Ustensiles";
+  ustensilBtn.classList.remove("expand-the-btn");
+  ustensilsList.classList.remove("expanded-ustensils");
+  inputUstensil.placeholder = "Ustensiles";
 };
 
 const removeIngredients = () => {
-  ingredientsBtn.classList.remove("expand-the-btn");
-  ingredientsPlaceholder.classList.remove("expanded-button");
-  //   chevronUpingredients.style.display = "none";
-  //   chevronDowningredients.style.display = "block";
+  ingredientBtn.classList.remove("expand-the-btn");
+  ingredientsList.classList.remove("expanded-button");
   inputIngredient.placeholder = " Ingrédients";
 };
 
-ingredientsBtn.addEventListener("click", () => {
-  ingredientsBtn.classList.add("expand-the-btn");
-  ingredientsPlaceholder.classList.add("expanded-button");
-  //   chevronDowningredients.style.display = "none";
-  //   chevronUpingredients.style.display = "block";
+// const removeDropdown = (
+//   button,
+//   elementsList,
+//   classText,
+//   inputElement,
+//   placeholderText
+// ) => {
+//   button.classList.remove("expand-the-btn");
+//   elementsList.classList.remove(classText);
+//   inputElement.placeholder = placeholderText;
+// };
+
+ingredientBtn.addEventListener("click", () => {
+  ingredientBtn.classList.add("expand-the-btn");
+  ingredientsList.classList.add("expanded-button");
   inputIngredient.placeholder = "Recherche un ingrédient";
 
-  removeAppliances();
   removeUstensils();
+  removeAppliances();
+  // removeDropdown(
+  //   applianceBtn,
+  //   appliancesList,
+  //   "expanded-appliances",
+  //   inputAppliance,
+  //   "Appareils"
+  // );
+  // removeDropdown(
+  //   ustensilBtn,
+  //   ustensilsList,
+  //   "expanded-ustensils",
+  //   inputUstensil,
+  //   "Ustensiles"
+  // );
 });
 
-appliancesBtn.addEventListener("click", () => {
-  appliancesBtn.classList.add("expand-the-btn");
-  appliancessPlaceholder.classList.add("expanded-appliances");
-  //   chevronDownappliances.style.display = "none";
-  //   chevronUpappliances.style.display = "block";
-  inputappliances.placeholder = "Recherche un appareil";
+applianceBtn.addEventListener("click", () => {
+  applianceBtn.classList.add("expand-the-btn");
+  appliancesList.classList.add("expanded-appliances");
+  inputAppliance.placeholder = "Recherche un appareil";
 
   removeIngredients();
   removeUstensils();
+  // removeDropdown(
+  //   ustensilBtn,
+  //   ustensilsList,
+  //   "expanded-ustensils",
+  //   inputUstensil,
+  //   "Ustensiles"
+  // );
+  // removeDropdown(
+  //   ingredientBtn,
+  //   ingredientsList,
+  //   "expanded-button",
+  //   inputIngredient,
+  //   "Ingrédients"
+  // );
 });
 
-ustensilsBtn.addEventListener("click", () => {
-  ustensilsBtn.classList.add("expand-the-btn");
-  ustensilsPlaceholder.classList.add("expanded-ustensils");
-  //   chevronDownustensils.style.display = "none";
-  //   chevronUpustensils.style.display = "block";
-  inputUstensile.placeholder = "Recherche un ustensile";
+ustensilBtn.addEventListener("click", () => {
+  ustensilBtn.classList.add("expand-the-btn");
+  ustensilsList.classList.add("expanded-ustensils");
+  inputUstensil.placeholder = "Recherche un ustensile";
 
   removeIngredients();
   removeAppliances();
+  // removeDropdown(
+  //   ingredientBtn,
+  //   ingredientsList,
+  //   "expanded-button",
+  //   inputIngredient,
+  //   "Ingrédients"
+  // );
+  // removeDropdown(
+  //   applianceBtn,
+  //   appliancesList,
+  //   "expanded-appliances",
+  //   inputAppliance,
+  //   "Appareils"
+  // );
 });
 
 document.addEventListener("click", (event) => {
   if (event.target.closest("#ingredients")) return;
   removeIngredients();
+  // removeDropdown(
+  //   ingredientBtn,
+  //   ingredientsList,
+  //   "expanded-button",
+  //   inputIngredient,
+  //   "Ingrédients"
+  // );
 
   if (event.target.closest("#appliances")) return;
   removeAppliances();
+  // removeDropdown(
+  //   applianceBtn,
+  //   appliancesList,
+  //   "expanded-appliances",
+  //   inputAppliance,
+  //   "Appareils"
+  // );
 
   if (event.target.closest("#ustensils")) return;
   removeUstensils();
+  // removeDropdown(
+  //   ustensilBtn,
+  //   ustensilsList,
+  //   "expanded-ustensils",
+  //   inputUstensil,
+  //   "Ustensiles"
+  // );
 });
-
-// document.addEventListener("click", (event) => {
-//   if (event.target.id == "chevron-up-ingredients") {
-//     removeIngredients();
-//   }
-
-//   if (event.target.id == "chevron-up-appliances") {
-//     removeAppliances();
-//   }
-
-//   if (event.target.id == "chevron-up-ustensils") {
-//     removeUstensils();
-//   }
-// });
