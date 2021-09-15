@@ -27,19 +27,32 @@ searchInput.addEventListener("input", () => {
 
 //
 // 1) Ajouter le tag au tableau des filtres
-// 2) Rechercher les recettes correspondant à la recherche par tag
-// 3) Afficher les tags sélectionnés en dessous de la barre de recherche
+// 2) Afficher les tags sélectionnés en dessous de la barre de recherche
+// 3) Rechercher les recettes correspondant à la recherche par tag
 // 4) Afficher les recettes correspondantes
 //
+
+const displayTag = (categoryName) => {
+  filterName.map(
+    (element) => (tagsList.innerHTML = tagListTemplate(element, categoryName))
+  );
+
+  const closeBtn = document.querySelector(".fa-times-circle");
+  closeBtn.addEventListener("click", (e) => {
+    const currentTagName = e.path[1].innerText.trim();
+    const positionIndex = filterName.indexOf(currentTagName);
+
+    filterName.splice(positionIndex, 1);
+    e.path[1].outerHTML = "";
+  });
+};
+
 document.addEventListener("click", (event) => {
   if (event.target.id === "input-ingredients") {
     document.addEventListener("click", (event) => {
       if (event.target.classList.contains("item")) {
         filterName.push(event.target.textContent);
-        filterName.map(
-          (element) =>
-            (tagsList.innerHTML = tagListTemplate(element, "ingredients"))
-        );
+        displayTag("ingredients");
       }
     });
   }
@@ -50,10 +63,7 @@ document.addEventListener("click", (event) => {
     document.addEventListener("click", (event) => {
       if (event.target.classList.contains("item")) {
         filterName.push(event.target.textContent);
-        filterName.map(
-          (element) =>
-            (tagsList.innerHTML = tagListTemplate(element, "appliances"))
-        );
+        displayTag("appliances");
       }
     });
   }
@@ -64,17 +74,8 @@ document.addEventListener("click", (event) => {
     document.addEventListener("click", (event) => {
       if (event.target.classList.contains("item")) {
         filterName.push(event.target.textContent);
-        filterName.map(
-          (element) =>
-            (tagsList.innerHTML = tagListTemplate(element, "ustensils"))
-        );
+        displayTag("ustensils");
       }
     });
   }
 });
-
-//
-// Afficher la liste des éléments en fonction du texte dans l'input
-//
-
-// inputIngredient.addEventListener("input", () => {});
