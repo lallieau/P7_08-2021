@@ -21,25 +21,18 @@ export const filterRecipesBySearchText = (searchFilter) => {
   );
 };
 
-export const filterRecipesByTag = (tagName) => {
-  const checkIfMatch = (text, filter) => {
-    const [formattedText, formattedFilter] = [
-      text.trim().toLowerCase(),
-      filter.map((element) => element.trim().toLowerCase()),
-    ];
+export const filterRecipesByTags = (filters) => {
+  const checkIfMatch = (filter, recipeTags) =>
+    recipeTags.some((recipeTag) => filter === recipeTag.toLowerCase().trim());
 
-    if (formattedFilter.some((element) => formattedText === element)) {
-      return formattedText;
-    }
-  };
-
-  return recipes.filter(({ ustensils, ingredients, appliance }) =>
-    [
-      ...ustensils.map((ustensil) => ustensil),
+  return recipes.filter(({ ustensils, ingredients, appliance }) => {
+    const recipeTags = [
+      ...ustensils,
       ...ingredients.map(({ ingredient }) => ingredient),
       appliance,
-    ].some((value) => checkIfMatch(value, tagName))
-  );
+    ];
+    return filters.every((filter) => checkIfMatch(filter, recipeTags));
+  });
 };
 
 // export const filterRecipesByIngredients = (filterName) => {

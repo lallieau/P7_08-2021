@@ -13,10 +13,6 @@ const ingredientsList = document.querySelector("#ingredients-placeholder");
 const appliancesList = document.querySelector("#appliances-placeholder");
 const ustensilsList = document.querySelector("#ustensils-placeholder");
 
-// export let tagName = [""];
-// export let searchFilter = "";
-// export let recipeFound = filterRecipesBySearchText(searchFilter);
-
 export const renderRecipes = () => {
   if (recipeFound.length === 0) noResult.innerHTML = noResultTemplate();
 
