@@ -62,11 +62,11 @@ export const elementsListTemplate = (element) => {
   return `<li class="item">${element}</li>`;
 };
 
-export const tagListTemplate = (tagName, caterogyName) => {
+export const tagListTemplate = (tagName, categoryName) => {
   return `  
-  <div class="tag tag-${caterogyName}">
-    <p class="tag__name">${tagName}</p>
-    <i class="fas fa-times-circle"></i>
-  </div>
+    <div class="tag tag-${categoryName}">
+      <p class="tag__name">${tagName}</p>
+      <i class="close fas fa-times-circle"></i>
+    </div>
   `;
 };

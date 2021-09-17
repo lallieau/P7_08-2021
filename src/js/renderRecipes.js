@@ -4,8 +4,6 @@ import {
   elementsListTemplate,
 } from "./templates.js";
 
-import { recipeFound } from "./eventListeners.js";
-
 const recipesList = document.querySelector("#list-recipes");
 const noResult = document.querySelector(".no-result");
 
@@ -13,18 +11,20 @@ const ingredientsList = document.querySelector("#ingredients-placeholder");
 const appliancesList = document.querySelector("#appliances-placeholder");
 const ustensilsList = document.querySelector("#ustensils-placeholder");
 
-export const renderRecipes = () => {
-  if (recipeFound.length === 0) noResult.innerHTML = noResultTemplate();
+export const renderRecipes = (recipes) => {
+  if (recipes.length === 0) noResult.innerHTML = noResultTemplate();
 
-  recipesList.innerHTML = recipeFound
+  recipesList.innerHTML = recipes
     .map((recipe) => recipesListTemplate(recipe))
     .join("");
 
-  renderAdvancedSearch();
+  renderAdvancedSearch(recipes);
 };
 
-export const renderAdvancedSearch = () => {
-  let [allIngredients, allAppliances, allUstensils] = [[], [], []];
+export const renderAdvancedSearch = (recipes) => {
+  const allIngredients = [];
+  const allAppliances = [];
+  const allUstensils = [];
 
   const removeDuplicateElements = (array) =>
     array.filter((item, index) => array.indexOf(item) === index);
@@ -34,7 +34,7 @@ export const renderAdvancedSearch = () => {
       .map((element) => elementsListTemplate(element))
       .join("");
 
-  recipeFound.map((recipe) => {
+  recipes.map((recipe) => {
     allAppliances.push(recipe.appliance.toLowerCase());
     recipe.ingredients.map((element) => {
       allIngredients.push(element.ingredient.toLowerCase());
@@ -49,4 +49,4 @@ export const renderAdvancedSearch = () => {
   ingredientsList.innerHTML = displayElements(allIngredients);
 };
 
-renderRecipes();
+// renderRecipes();

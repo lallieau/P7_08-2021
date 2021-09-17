@@ -1,7 +1,10 @@
 import { recipes } from "./data/recipes.js";
 
-export const filterRecipesBySearchText = (searchFilter) => {
-  const checkIfMatch = (text, search) => {
+// export let recipeFound = recipes;
+
+export const filterRecipes = (searchFilter, filters) => {
+  let recipeFound = recipes;
+  const checkSearchQuery = (text, search) => {
     const [formattedText, formattedSearch] = [
       text.trim().toLowerCase(),
       search.trim().toLowerCase(),
@@ -12,26 +15,39 @@ export const filterRecipesBySearchText = (searchFilter) => {
     }
   };
 
-  return recipes.filter(({ name, description, ingredients }) =>
+  const checkIfFilterMatch = (filter, recipeTags) =>
+    recipeTags.some((recipeTag) => filter === recipeTag.toLowerCase().trim());
+
+  recipeFound = recipeFound.filter(({ name, description, ingredients }) =>
     [
       name,
       description,
       ...ingredients.map(({ ingredient }) => ingredient),
-    ].some((value) => checkIfMatch(value, searchFilter))
+    ].some((value) => checkSearchQuery(value, searchFilter))
   );
-};
 
-export const filterRecipesByTags = (filters) => {
-  const checkIfMatch = (filter, recipeTags) =>
-    recipeTags.some((recipeTag) => filter === recipeTag.toLowerCase().trim());
-
-  return recipes.filter(({ ustensils, ingredients, appliance }) => {
+  recipeFound = recipeFound.filter(({ ustensils, ingredients, appliance }) => {
     const recipeTags = [
       ...ustensils,
       ...ingredients.map(({ ingredient }) => ingredient),
       appliance,
     ];
-    return filters.every((filter) => checkIfMatch(filter, recipeTags));
+    return filters.every((filter) =>
+      checkIfFilterMatch(filter.tag, recipeTags)
+    );
+  });
+
+  return recipeFound;
+};
+
+export const filterRecipesByTags = (filters) => {
+  recipeFound = recipeFound.filter(({ ustensils, ingredients, appliance }) => {
+    const recipeTags = [
+      ...ustensils,
+      ...ingredients.map(({ ingredient }) => ingredient),
+      appliance,
+    ];
+    return filters.every((filter) => checkIfMatch(filter.tag, recipeTags));
   });
 };
 
