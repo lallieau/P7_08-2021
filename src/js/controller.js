@@ -1,9 +1,8 @@
 import { recipes } from "./data/recipes.js";
 
-// export let recipeFound = recipes;
-
-export const filterRecipes = (searchFilter, filters) => {
+export const filterRecipes = (searchQuery, filters) => {
   let recipeFound = recipes;
+
   const checkSearchQuery = (text, search) => {
     const [formattedText, formattedSearch] = [
       text.trim().toLowerCase(),
@@ -23,7 +22,7 @@ export const filterRecipes = (searchFilter, filters) => {
       name,
       description,
       ...ingredients.map(({ ingredient }) => ingredient),
-    ].some((value) => checkSearchQuery(value, searchFilter))
+    ].some((value) => checkSearchQuery(value, searchQuery))
   );
 
   recipeFound = recipeFound.filter(({ ustensils, ingredients, appliance }) => {
@@ -39,36 +38,3 @@ export const filterRecipes = (searchFilter, filters) => {
 
   return recipeFound;
 };
-
-export const filterRecipesByTags = (filters) => {
-  recipeFound = recipeFound.filter(({ ustensils, ingredients, appliance }) => {
-    const recipeTags = [
-      ...ustensils,
-      ...ingredients.map(({ ingredient }) => ingredient),
-      appliance,
-    ];
-    return filters.every((filter) => checkIfMatch(filter.tag, recipeTags));
-  });
-};
-
-// export const filterRecipesByIngredients = (filterName) => {
-//   return recipes.filter(({ ingredients }) =>
-//     [...ingredients.map(({ ingredient }) => ingredient)].some((value) =>
-//       checkIfMatch(value, filterName)
-//     )
-//   );
-// };
-
-// export const filterRecipesByUstensils = (filterName) => {
-//   return recipes.filter(({ ustensils }) =>
-//     [...ustensils.map((ustensil) => ustensil)].some((value) =>
-//       checkIfMatch(value, filterName)
-//     )
-//   );
-// };
-
-// export const filterRecipesByAppliance = (filterName) => {
-//   return recipes.filter(({ appliance }) =>
-//     [appliance].some((value) => checkIfMatch(value, filterName))
-//   );
-// };

@@ -65,18 +65,3 @@ document.addEventListener("click", (event) => {
   if (event.target.closest("#ustensils")) return;
   removeUstensils();
 });
-
-// inputUstensil.addEventListener("input", () => {
-//   if (inputUstensil.value.length >= 3) {
-//     console.log(
-//       recipes.filter(({ appliance }) =>
-//         [appliance].some((value) => value.includes(inputUstensil.value))
-//       )
-//     );
-
-//     console.log(recipes.map((element) => element.appliance));
-//     console.log(
-//       recipes.map((element) => element.appliance).includes(inputUstensil.value)
-//     );
-//   }
-// });

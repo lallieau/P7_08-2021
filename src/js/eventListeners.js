@@ -1,5 +1,5 @@
-import { renderRecipes, renderAdvancedSearch } from "./renderRecipes.js";
-import { filterRecipes, filterRecipesByTags } from "./controller.js";
+import { renderRecipes } from "./renderRecipes.js";
+import { filterRecipes } from "./controller.js";
 import { tagListTemplate } from "./templates.js";
 import {
   inputAppliance,
@@ -12,25 +12,21 @@ import {
 
 export let searchFilter = "";
 export let filters = [];
+export let sortFilter = "";
 
 const searchInput = document.querySelector(".form-control");
 const tagsList = document.querySelector(".tags");
 
 searchInput.addEventListener("input", () => {
-  // console.log(searchInput.value);
-  // console.log(searchInput.value);
   if (searchInput.value.length >= 3) {
     searchFilter = searchInput.value;
-    refresh();
+    refresh(sortFilter);
   }
 });
 
-const refresh = () => {
+const refresh = (sortFilter) => {
   const recipes = filterRecipes(searchFilter, filters);
-  // console.log(recipes);
-  // filterRecipesBySearchText(searchFilter);
-  // filterRecipesByTags(filters);
-  renderRecipes(recipes);
+  renderRecipes(recipes, sortFilter);
 };
 
 const addFilter = (newFilter) => {
@@ -48,58 +44,34 @@ const addFilter = (newFilter) => {
   newTag.innerHTML = tagListTemplate(newFilter.tag, newFilter.category);
   tagsList.appendChild(newTag);
 
-  // const newTag = document.querySelectorAll(`.tag`).item();
-  // console.log(newTag);
-
   const closeBtn = newTag.querySelector(".close");
-
   closeBtn.addEventListener("click", (e) => {
-    // console.log(newTag);
     newTag.remove();
     const positionIndex = filters.indexOf(newFilter);
-    // console.log(filters);
+
     filters.splice(positionIndex, 1);
-    refresh();
-
-    // const currentTagName = e.path[1].innerText.trim();
-    // console.log(currentTagName);
-
-    // console.log(positionIndex);
-
-    // filters.splice(positionIndex, 1);
-    // e.path[1].outerHTML = "";
-
-    // if (tagName === [""]) {
-    //   recipeFound = filterRecipesBySearchText(searchFilter);
-    //   return renderRecipes(), renderAdvancedSearch();
-    // } else {
-    // recipeFound =
-    //   filterRecipesBySearchText(searchFilter) && filterRecipesByTags(filters);
-    // return renderRecipes(), renderAdvancedSearch();
-    // }
+    refresh(sortFilter);
   });
 
-  refresh();
+  refresh(sortFilter);
 };
 
 inputIngredient.addEventListener("click", () => {
   const items = ingredientContainer.querySelectorAll(".item");
   items.forEach((item) => {
     item.addEventListener("click", (event) => {
+      console.log(item);
       addFilter({
         tag: event.target.textContent,
         category: "ingredients",
       });
-      // if (!filters.includes(event.target.textContent)) {
-      //   const newFilter = {
-      //     tag: event.target.textContent,
-      //     category: "ingredients",
-      //   };
-      //   filters.push(newFilter);
-      //   addFilter(newFilter);
-      // }
     });
   });
+
+  // inputIngredient.addEventListener("input", () => {
+  //   sortFilter = inputIngredient.value;
+  //   refresh(sortFilter);
+  // });
 });
 
 inputAppliance.addEventListener("click", () => {
@@ -110,16 +82,13 @@ inputAppliance.addEventListener("click", () => {
         tag: event.target.textContent,
         category: "appliances",
       });
-      // if (!filters.includes(event.target.textContent)) {
-      //   const newFilter = {
-      //     tag: event.target.textContent,
-      //     category: "appliances",
-      //   };
-      //   filters.push(newFilter);
-      //   addFilter(newFilter);
-      // }
     });
   });
+
+  // inputAppliance.addEventListener("input", () => {
+  //   sortFilter = inputAppliance.value;
+  //   refresh(sortFilter);
+  // });
 });
 
 inputUstensil.addEventListener("click", () => {
@@ -132,6 +101,26 @@ inputUstensil.addEventListener("click", () => {
       });
     });
   });
+
+  // inputUstensil.addEventListener("input", () => {
+  //   sortFilter = inputUstensil.value;
+  //   refresh(sortFilter);
+  // });
 });
 
-refresh();
+inputIngredient.addEventListener("input", () => {
+  sortFilter = inputIngredient.value;
+  refresh(sortFilter);
+});
+
+inputAppliance.addEventListener("input", () => {
+  sortFilter = inputAppliance.value;
+  refresh(sortFilter);
+});
+
+inputUstensil.addEventListener("input", () => {
+  sortFilter = inputUstensil.value;
+  refresh(sortFilter);
+});
+
+refresh(sortFilter);
