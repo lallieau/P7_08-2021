@@ -5,6 +5,10 @@
     <title>Les petits plats</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
@@ -14,15 +18,17 @@
   </head>
   <body>
     <header>
-      <img src="./src/public/assets/logo.svg" alt="" />
-      <h1>Les petits plats</h1>
+      <a href="index.html"
+        ><img src="./src/public/assets/logo.svg" alt="" />
+        <h1>Les petits plats</h1></a
+      >
     </header>
 
     <form class="form-inline">
       <input
         class="form-control mr-sm-2"
         type="search"
-        placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+        placeholder="Rechercher un ingrédient, appliances, ustensils ou une recette"
         aria-label="Search"
       />
       <button class="btn-search" type="submit">
@@ -42,74 +48,37 @@
       </button>
     </form>
 
-    <div id="list-filters">
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Ingrédients
-        </button>
-        <ul
-          class="dropdown-menu"
-          id="dropdownMenu1"
-          aria-labelledby="dropdownMenuButton1"
-        >
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
+    <div class="tags"></div>
 
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton2"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Appareil
-        </button>
-        <ul
-          class="dropdown-menu"
-          id="dropdownMenu2"
-          aria-labelledby="dropdownMenuButton2"
-        >
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
+    <ul id="filter-buttons">
+      <li id="ingredients">
+        <input id="input-ingredients" type="text" placeholder="Ingrédients" />
+        <i class="fas fa-chevron-down" id="chevron-down-ingredients"></i>
+        <i class="fas fa-chevron-up" id="chevron-up-ingredients"></i>
+        <ul id="ingredients-placeholder"></ul>
+      </li>
 
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton3"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Ustensiles
-        </button>
-        <ul
-          class="dropdown-menu"
-          id="dropdownMenu3"
-          aria-labelledby="dropdownMenuButton3"
-        >
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-    </div>
+      <li id="appliances">
+        <input id="input-appliances" type="text" placeholder="Appareils" />
+        <i class="fas fa-chevron-down" id="chevron-down-appliances"></i>
+        <i class="fas fa-chevron-up" id="chevron-up-appliances"></i>
+        <ul id="appliances-placeholder"></ul>
+      </li>
+
+      <li id="ustensils">
+        <input id="input-ustensils" type="text" placeholder="Ustensiles" />
+        <i class="fas fa-chevron-down" id="chevron-down-ustensils"></i>
+        <i class="fas fa-chevron-up" id="chevron-up-ustensils"></i>
+        <ul id="ustensils-placeholder"></ul>
+      </li>
+    </ul>
 
     <section id="list-recipes"></section>
+    <section class="no-result"></section>
 
-    <script type="module" src="./src/js/showRecipes.js"></script>
+    <script type="module" src="./src/js/renderRecipes.js"></script>
+    <script type="module" src="./src/js/eventListeners.js"></script>
+    <script type="module" src="./src/js/dropdown.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"

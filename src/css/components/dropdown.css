@@ -1,0 +1,122 @@
+#filter-buttons {
+  list-style-type: none;
+  display: flex;
+}
+
+#filter-buttons > li {
+  height: 3rem;
+  margin-right: 1rem;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  position: relative;
+}
+
+#filter-buttons input {
+  color: #fff;
+  padding-left: 1rem;
+}
+
+#filter-buttons > li > .fa-chevron-down {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+#chevron-up-ingredients,
+#chevron-up-appliances,
+#chevron-up-ustensils {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  color: #fff;
+  display: none;
+  cursor: pointer;
+}
+
+.expand-the-btn {
+  width: 50%;
+}
+
+.expanded-button {
+  border-radius: 0 0 5px 5px;
+  display: flex !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: hidden !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+}
+
+.expanded-button,
+.expanded-appliances,
+.expanded-ustensils {
+  max-height: 16.5rem;
+  border-radius: 0 0 5px 5px;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: hidden !important;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+.expanded-button {
+  background-color: var(--blue-color) !important;
+}
+
+.expanded-appliances {
+  background-color: var(--green-color) !important;
+}
+
+.expanded-ustensils {
+  background-color: var(--red-color) !important;
+}
+
+.item {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  list-style: none;
+  padding: 5px;
+}
+
+.item:hover {
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+}
+
+#input-appliances,
+#input-ingredients,
+#input-ustensils {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+#input-ingredients {
+  background-color: var(--blue-color);
+}
+#input-appliances {
+  background-color: var(--green-color);
+}
+#input-ustensils {
+  background-color: var(--red-color);
+}
+
+#input-ingredients::placeholder,
+#input-appliances::placeholder,
+#input-ustensils::placeholder {
+  color: white;
+  padding-left: 1rem;
+}
+
+#ingredients-placeholder,
+#appliances-placeholder,
+#ustensils-placeholder {
+  display: none;
+}
