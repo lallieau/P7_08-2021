@@ -10,11 +10,11 @@ import {
   ustensilContainer,
 } from "./dropdown.js";
 
-export let searchFilter = "";
-export let filters = [];
-export let ingredientsSortFilter = "";
-export let ustensilsSortFilter = "";
-export let appliancesSortFilter = "";
+let searchFilter = "";
+const filters = [];
+let ingredientsSortFilter = "";
+let ustensilsSortFilter = "";
+let appliancesSortFilter = "";
 
 const searchInput = document.querySelector(".form-control");
 const tagsList = document.querySelector(".tags");
@@ -115,4 +115,6 @@ inputUstensil.addEventListener("input", () => {
   refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
 });
 
-refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
+window.onload = () => {
+  refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
+};

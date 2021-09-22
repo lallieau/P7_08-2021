@@ -57,10 +57,6 @@ export const renderAdvancedSearch = (
       .map((element) => elementsListTemplate(element))
       .join("");
 
-  // const displayElementsWithSortFilter = (allElements, sortFilter) =>
-  //   sortFilters(allElements, sortFilter)
-  //     .map((element) => elementsListTemplate(element))
-  //     .join("");
   recipes.map((recipe) => {
     allAppliances.push(recipe.appliance.toLowerCase());
     recipe.ingredients.map((element) => {
@@ -70,21 +66,6 @@ export const renderAdvancedSearch = (
       allUstensils.push(element.toLowerCase());
     });
   });
-
-  // ingredientsList.innerHTML = displayElementsWithSortFilter(
-  //   allIngredients,
-  //   ingredientsSortFilter
-  // );
-
-  // appliancesList.innerHTML = displayElementsWithSortFilter(
-  //   allAppliances,
-  //   appliancesSortFilter
-  // );
-
-  // ustensilsList.innerHTML = displayElementsWithSortFilter(
-  //   allUstensils,
-  //   ustensilsSortFilter
-  // );
 
   ingredientsList.innerHTML = displayElements(
     allIngredients,
