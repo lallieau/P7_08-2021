@@ -71,7 +71,6 @@ export const addTagsEventListeners = () => {
   const ingredientsItems = ingredientContainer.querySelectorAll(".item");
   ingredientsItems.forEach((item) => {
     item.addEventListener("click", (event) => {
-      console.log(event);
       addFilter({
         tag: event.target.textContent,
         category: "ingredients",
