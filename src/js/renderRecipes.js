@@ -4,6 +4,8 @@ import {
   elementsListTemplate,
 } from "./templates.js";
 
+import { addTagsEventListeners } from "./eventListeners.js";
+
 const recipesList = document.querySelector("#list-recipes");
 const noResult = document.querySelector(".no-result");
 
@@ -11,33 +13,47 @@ const ingredientsList = document.querySelector("#ingredients-placeholder");
 const appliancesList = document.querySelector("#appliances-placeholder");
 const ustensilsList = document.querySelector("#ustensils-placeholder");
 
-export const renderRecipes = (recipes, sortQuery) => {
+export const renderRecipes = (
+  recipes,
+  ingredientsSortFilter,
+  appliancesSortFilter,
+  ustensilsSortFilter
+) => {
   if (recipes.length === 0) noResult.innerHTML = noResultTemplate();
 
   recipesList.innerHTML = recipes
     .map((recipe) => recipesListTemplate(recipe))
     .join("");
 
-  renderAdvancedSearch(recipes, sortQuery);
+  renderAdvancedSearch(
+    recipes,
+    ingredientsSortFilter,
+    appliancesSortFilter,
+    ustensilsSortFilter
+  );
 };
 
-export const allIngredients = [];
-export const allAppliances = [];
-export const allUstensils = [];
-
-export const renderAdvancedSearch = (recipes, sortQuery) => {
+export const renderAdvancedSearch = (
+  recipes,
+  ingredientsSortFilter,
+  appliancesSortFilter,
+  ustensilsSortFilter
+) => {
+  const allIngredients = [];
+  const allAppliances = [];
+  const allUstensils = [];
   const removeDuplicateElements = (array) =>
     array.filter((item, index) => array.indexOf(item) === index);
 
-  const sortFilters = (array) =>
+  const sortFilters = (array, sortFilter) =>
     removeDuplicateElements(
       array.filter((element) =>
-        element.includes(sortQuery.toLowerCase().trim())
+        element.includes(sortFilter.toLowerCase().trim())
       )
     );
 
-  const displayElements = (allElements) =>
-    sortFilters(allElements)
+  const displayElements = (allElements, sortFilter) =>
+    sortFilters(allElements, sortFilter)
       .map((element) => elementsListTemplate(element))
       .join("");
 
@@ -51,7 +67,15 @@ export const renderAdvancedSearch = (recipes, sortQuery) => {
     });
   });
 
-  ustensilsList.innerHTML = displayElements(allUstensils);
-  appliancesList.innerHTML = displayElements(allAppliances);
-  ingredientsList.innerHTML = displayElements(allIngredients);
+  ingredientsList.innerHTML = displayElements(
+    allIngredients,
+    ingredientsSortFilter
+  );
+  appliancesList.innerHTML = displayElements(
+    allAppliances,
+    appliancesSortFilter
+  );
+  ustensilsList.innerHTML = displayElements(allUstensils, ustensilsSortFilter);
+
+  addTagsEventListeners();
 };

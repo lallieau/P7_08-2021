@@ -10,9 +10,11 @@ import {
   ustensilContainer,
 } from "./dropdown.js";
 
-export let searchFilter = "";
-export let filters = [];
-export let sortFilter = "";
+let searchFilter = "";
+const filters = [];
+let ingredientsSortFilter = "";
+let ustensilsSortFilter = "";
+let appliancesSortFilter = "";
 
 const searchInput = document.querySelector(".form-control");
 const tagsList = document.querySelector(".tags");
@@ -20,13 +22,22 @@ const tagsList = document.querySelector(".tags");
 searchInput.addEventListener("input", () => {
   if (searchInput.value.length >= 3) {
     searchFilter = searchInput.value;
-    refresh(sortFilter);
+    refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
   }
 });
 
-const refresh = (sortFilter) => {
+const refresh = (
+  ingredientsSortFilter,
+  appliancesSortFilter,
+  ustensilsSortFilter
+) => {
   const recipes = filterRecipes(searchFilter, filters);
-  renderRecipes(recipes, sortFilter);
+  renderRecipes(
+    recipes,
+    ingredientsSortFilter,
+    appliancesSortFilter,
+    ustensilsSortFilter
+  );
 };
 
 const addFilter = (newFilter) => {
@@ -50,17 +61,17 @@ const addFilter = (newFilter) => {
     const positionIndex = filters.indexOf(newFilter);
 
     filters.splice(positionIndex, 1);
-    refresh(sortFilter);
+    refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
   });
 
-  refresh(sortFilter);
+  refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
 };
 
-inputIngredient.addEventListener("click", () => {
-  const items = ingredientContainer.querySelectorAll(".item");
-  items.forEach((item) => {
+export const addTagsEventListeners = () => {
+  const ingredientsItems = ingredientContainer.querySelectorAll(".item");
+  ingredientsItems.forEach((item) => {
     item.addEventListener("click", (event) => {
-      console.log(item);
+      console.log(event);
       addFilter({
         tag: event.target.textContent,
         category: "ingredients",
@@ -68,15 +79,8 @@ inputIngredient.addEventListener("click", () => {
     });
   });
 
-  // inputIngredient.addEventListener("input", () => {
-  //   sortFilter = inputIngredient.value;
-  //   refresh(sortFilter);
-  // });
-});
-
-inputAppliance.addEventListener("click", () => {
-  const items = applianceContainer.querySelectorAll(".item");
-  items.forEach((item) => {
+  const applianceItems = applianceContainer.querySelectorAll(".item");
+  applianceItems.forEach((item) => {
     item.addEventListener("click", (event) => {
       addFilter({
         tag: event.target.textContent,
@@ -85,15 +89,8 @@ inputAppliance.addEventListener("click", () => {
     });
   });
 
-  // inputAppliance.addEventListener("input", () => {
-  //   sortFilter = inputAppliance.value;
-  //   refresh(sortFilter);
-  // });
-});
-
-inputUstensil.addEventListener("click", () => {
-  const items = ustensilContainer.querySelectorAll(".item");
-  items.forEach((item) => {
+  const ustensilItems = ustensilContainer.querySelectorAll(".item");
+  ustensilItems.forEach((item) => {
     item.addEventListener("click", (event) => {
       addFilter({
         tag: event.target.textContent,
@@ -101,26 +98,23 @@ inputUstensil.addEventListener("click", () => {
       });
     });
   });
-
-  // inputUstensil.addEventListener("input", () => {
-  //   sortFilter = inputUstensil.value;
-  //   refresh(sortFilter);
-  // });
-});
+};
 
 inputIngredient.addEventListener("input", () => {
-  sortFilter = inputIngredient.value;
-  refresh(sortFilter);
+  ingredientsSortFilter = inputIngredient.value;
+  refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
 });
 
 inputAppliance.addEventListener("input", () => {
-  sortFilter = inputAppliance.value;
-  refresh(sortFilter);
+  appliancesSortFilter = inputAppliance.value;
+  refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
 });
 
 inputUstensil.addEventListener("input", () => {
-  sortFilter = inputUstensil.value;
-  refresh(sortFilter);
+  ustensilsSortFilter = inputUstensil.value;
+  refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
 });
 
-refresh(sortFilter);
+window.onload = () => {
+  refresh(ingredientsSortFilter, appliancesSortFilter, ustensilsSortFilter);
+};
